@@ -36,13 +36,21 @@ src/
 │ └── Usuario.java
 
 ├── dao
+
 │ ├── PodcastDAO.java
+
 │ └── UsuarioDAO.java
+
 ├── view
+
 │ ├── TelaLogin.java
+
 │ ├── TelaPrincipal.java
+
 │ └── Listagem.java
+
 └── META-INF
+
 └── persistence.xml
 
 ## 5. Controle de Acesso
