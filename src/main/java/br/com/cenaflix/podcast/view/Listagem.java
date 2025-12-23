@@ -3,6 +3,9 @@ package br.com.cenaflix.podcast.view;
 import br.com.cenaflix.podcast.dao.PodcastDAO;
 import br.com.cenaflix.podcast.model.Podcast;
 import br.com.cenaflix.podcast.model.Usuario;
+import br.com.cenaflix.podcast.util.Sessao;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,12 +29,23 @@ public class Listagem extends javax.swing.JFrame {
         } 
     }
     
-    private void aplicarVoltar(){
-        if (!usuarioLogado.getTipo().equals("Administrador") || 
-                !usuarioLogado.getTipo().equals("Operador"))
-            btVoltar.setEnabled(false);
-            btVoltar.setVisible(false);
-        }
+    private void aplicarVoltar() {
+        btVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo = usuarioLogado.getTipo();
+
+                if (tipo.equals("Administrador") || tipo.equals("Operador")) {
+                    TelaPrincipal principal = new TelaPrincipal(usuarioLogado);
+                    principal.setVisible(true);
+                    dispose();
+                } else if (tipo.equalsIgnoreCase("Usuario")) {
+                    Sessao.logout(Listagem.this);
+                }                
+            }
+        });
+    }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -103,8 +117,8 @@ public class Listagem extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))
+                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -149,12 +163,8 @@ public class Listagem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFiltrarActionPerformed
-        btFiltrar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            String produtor = txtFiltro.getText();
-                filtrarPorProdutor(produtor);
-            }
-        });
+        String produtor = txtFiltro.getText();
+        filtrarPorProdutor(produtor);
     }//GEN-LAST:event_btFiltrarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
@@ -170,16 +180,21 @@ public class Listagem extends javax.swing.JFrame {
             dao.excluir(id);
             JOptionPane.showMessageDialog(this, "Podcast excluído com sucesso!");        
             atualizarTabela();
-    } else {
-        JOptionPane.showMessageDialog(this, "Selecione um podcast para excluir.");
-    }
-
-
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um podcast para excluir.");
+        }
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        this.dispose();
-        TelaPrincipal tela = new TelaPrincipal(usuarioLogado); tela.setVisible(true);
+        String tipo = usuarioLogado.getTipo();
+        
+        if(tipo.equalsIgnoreCase("Administrador") || tipo.equalsIgnoreCase("Operador")){
+            TelaPrincipal principal = new TelaPrincipal(usuarioLogado);
+            principal.setVisible(true);
+            this.dispose();
+        } else{
+            Sessao.logout(this);
+        }        
     }//GEN-LAST:event_btVoltarActionPerformed
 
     

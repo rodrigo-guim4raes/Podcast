@@ -53,8 +53,8 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btFiltrar" min="-2" pref="77" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btExcluir" min="-2" pref="82" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="btExcluir" min="-2" pref="106" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
                   </Group>

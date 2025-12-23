@@ -130,38 +130,36 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         String login = txtUsuario.getText();
-        String senha = txtSenha.getText();
-
+        String senha = new String(txtSenha.getPassword());
+        
         UsuarioDAO dao = new UsuarioDAO();
-        Usuario usuario = dao.autenticar(login, senha);
+        Usuario usuario = dao.autenticar(login, senha);                
 
         if (usuario != null) {
+            JOptionPane.showMessageDialog(this,
+                "Bem-vindo, " + usuario.getNome() +
+                ". Permissão: " + usuario.getTipo()); 
+            
             String tipo = usuario.getTipo();
 
             switch (tipo) {
                 case "Administrador":
-                    TelaPrincipal telaAdmin = new TelaPrincipal(usuario);
-                    telaAdmin.setVisible(true);
-                    break;
-
                 case "Operador":
-                    TelaPrincipal telaOperador = new TelaPrincipal(usuario);
-                    telaOperador.setVisible(true);
+                    new TelaPrincipal(usuario).setVisible(true);
+                    this.dispose();
                     break;
 
                 case "Usuario":
-                    Listagem telaUsuario = new Listagem(usuario);
-                    telaUsuario.setVisible(true);
+                    new Listagem(usuario).setVisible(true);
+                    this.dispose();
                     break;
 
                 default:
                     JOptionPane.showMessageDialog(this, "Tipo de usuário inválido.");
             }
-
-            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Login ou senha incorretos.");
-        }
+        }                   
     }//GEN-LAST:event_btLoginActionPerformed
 
     

@@ -3,10 +3,11 @@ package br.com.cenaflix.podcast.view;
 import br.com.cenaflix.podcast.dao.PodcastDAO;
 import br.com.cenaflix.podcast.model.Podcast;
 import br.com.cenaflix.podcast.model.Usuario;
+import br.com.cenaflix.podcast.util.Sessao;
 import javax.swing.JOptionPane;
 
 public class TelaPrincipal extends javax.swing.JFrame {
-    private Usuario usuarioLogado; // já está sendo passado no construtor
+    private Usuario usuarioLogado; 
     public TelaPrincipal(Usuario usuarioLogado) {
         initComponents();        
         this.usuarioLogado = usuarioLogado; 
@@ -216,32 +217,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
         try {
-        Podcast podcast = new Podcast();
-        podcast.setProdutor(txtProdutor.getText());
-        podcast.setNomeEpisodio(txEpisodio.getText());
-        podcast.setNumeroEpisodio(Integer.parseInt(txtNumeroEpisodio.getText()));
-        podcast.setDuracao(txtDuracao.getText());
-        podcast.setUrlRepositorio(txtLink.getText());
+            Podcast podcast = new Podcast();
+            podcast.setProdutor(txtProdutor.getText());
+            podcast.setNomeEpisodio(txEpisodio.getText());
+            podcast.setNumeroEpisodio(Integer.parseInt(txtNumeroEpisodio.getText()));
+            podcast.setDuracao(txtDuracao.getText());
+            podcast.setUrlRepositorio(txtLink.getText());
 
-        PodcastDAO dao = new PodcastDAO();
-        dao.salvar(podcast);
+            PodcastDAO dao = new PodcastDAO();
+            dao.salvar(podcast);
 
-        JOptionPane.showMessageDialog(this, "Podcast cadastrado com sucesso!");
-        limparCampos();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
-    }
+            JOptionPane.showMessageDialog(this, "Podcast cadastrado com sucesso!");
+            limparCampos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage());
+        }
     }//GEN-LAST:event_btCadastroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Listagem lista = new Listagem(usuarioLogado);
         lista.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-        this.dispose();
-        TelaLogin tela = new TelaLogin(); 
-        tela.setVisible(true);
+        Sessao.logout(this);
     }//GEN-LAST:event_btSairActionPerformed
 
     private void limparCampos() {
@@ -254,46 +254,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void aplicarPermissoes() {
-    String tipo = usuarioLogado.getTipo();
+        String tipo = usuarioLogado.getTipo();
 
-    switch (tipo) {
-        case "Administrador":
-            btCadastro.setEnabled(true);
-            jButton1.setEnabled(true); // botão LISTA
-            // na tela de listagem o botão excluir ficará habilitado
-            break;
+        switch (tipo) {
+            case "Administrador":
+                btCadastro.setEnabled(true);
+                jButton1.setEnabled(true); 
+                break;
 
-        case "Operador":
-            btCadastro.setEnabled(true);
-            jButton1.setEnabled(true);
-            // na tela de listagem o botão excluir ficará desabilitado
-            break;
+            case "Operador":
+                btCadastro.setEnabled(true);
+                jButton1.setEnabled(true);         
+                break;
 
-        case "Usuario":
-            btCadastro.setEnabled(false); // não pode cadastrar
-            jButton1.setEnabled(true);    // pode listar
-            // na tela de listagem o botão excluir ficará desabilitado
-            break;
+            case "Usuario":
+                btCadastro.setEnabled(false); 
+                jButton1.setEnabled(true);               
+                break;
 
-        default:
-            btCadastro.setEnabled(false);
-            jButton1.setEnabled(false);
-            JOptionPane.showMessageDialog(this,
+            default:
+                btCadastro.setEnabled(false);
+                jButton1.setEnabled(false);
+                JOptionPane.showMessageDialog(this,
                 "Tipo de usuário desconhecido. Nenhuma permissão atribuída.");
-    }
-
-    JOptionPane.showMessageDialog(this,
-        "Bem-vindo, " + usuarioLogado.getNome() +
-        ". Permissão: " + tipo);
+        } 
     }
 
     
     public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+           
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
