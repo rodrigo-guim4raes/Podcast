@@ -1,4 +1,4 @@
-# 🎙️ Sistema de Gerenciamento de Podcasts – CENAFIX
+# 🎙️ Sistema de Gerenciamento de Podcasts – CENAFLIX
 
 ## 1. Introdução
 Este projeto consiste no desenvolvimento de um sistema para gerenciamento de podcasts, implementado em Java, com interface gráfica baseada em Swing e persistência de dados utilizando JPA (Hibernate) e MySQL.
