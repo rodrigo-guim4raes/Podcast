@@ -42,7 +42,7 @@ src/
 │   └── Listagem.java
 └── META-INF
     └── persistence.xml
-
+```
 
 ## 5. Controle de Acesso
 O sistema diferencia usuários comuns e administradores, permitindo que apenas administradores realizem exclusões de registros.
