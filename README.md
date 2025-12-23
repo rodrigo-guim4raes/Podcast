@@ -27,39 +27,25 @@ Desenvolver um sistema desktop capaz de realizar o cadastro, listagem e exclusã
 - NetBeans IDE
 
 ## 4. Estrutura do Projeto
+
+```text
 src/
-
 ├── model
-
-│ ├── Podcast.java
-
-│ └── Usuario.java
-
+│   ├── Podcast.java
+│   └── Usuario.java
 ├── dao
-
-│ ├── PodcastDAO.java
-
-│ └── UsuarioDAO.java
-
+│   ├── PodcastDAO.java
+│   └── UsuarioDAO.java
 ├── view
-
-│ ├── TelaLogin.java
-
-│ ├── TelaPrincipal.java
-
-│ └── Listagem.java
-
+│   ├── TelaLogin.java
+│   ├── TelaPrincipal.java
+│   └── Listagem.java
 └── META-INF
+    └── persistence.xml
 
-└── persistence.xml
 
 ## 5. Controle de Acesso
 O sistema diferencia usuários comuns e administradores, permitindo que apenas administradores realizem exclusões de registros.
 
 ## 6. Conclusão
 O projeto permitiu consolidar conhecimentos de Java, persistência de dados e desenvolvimento de aplicações desktop, atingindo os objetivos propostos.
-
-## 7. Trabalhos Futuros
-- Criptografia de senhas
-- Relatórios
-- Migração para JavaFX
