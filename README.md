@@ -29,17 +29,17 @@ Desenvolver um sistema desktop capaz de realizar o cadastro, listagem e exclusã
 ## 4. Estrutura do Projeto
 src/
 ├── model
-│   ├── Podcast.java
-│   └── Usuario.java
+│ ├── Podcast.java
+│ └── Usuario.java
 ├── dao
-│   ├── PodcastDAO.java
-│   └── UsuarioDAO.java
+│ ├── PodcastDAO.java
+│ └── UsuarioDAO.java
 ├── view
-│   ├── TelaLogin.java
-│   ├── TelaPrincipal.java
-│   └── Listagem.java
+│ ├── TelaLogin.java
+│ ├── TelaPrincipal.java
+│ └── Listagem.java
 └── META-INF
-    └── persistence.xml
+└── persistence.xml
 
 ## 5. Controle de Acesso
 O sistema diferencia usuários comuns e administradores, permitindo que apenas administradores realizem exclusões de registros.
