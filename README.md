@@ -28,9 +28,13 @@ Desenvolver um sistema desktop capaz de realizar o cadastro, listagem e exclusã
 
 ## 4. Estrutura do Projeto
 src/
+
 ├── model
+
 │ ├── Podcast.java
+
 │ └── Usuario.java
+
 ├── dao
 │ ├── PodcastDAO.java
 │ └── UsuarioDAO.java
