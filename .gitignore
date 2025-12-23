@@ -1,0 +1,8 @@
+#Ignorar configuração JPA local
+src/main/resources/META-INF/persistence.xml
+
+#Ignorar arquivos gerados pelo Maven
+target/
+
+#Ignorar configurações privadas do NetBeans
+nbproject/private/
